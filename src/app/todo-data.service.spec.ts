@@ -94,4 +94,16 @@ describe('TodoDataService', () => {
       }));
   });
 
+  describe('#getSubTasks(parentTodo)', () => {
+      it('given the ID of a todo, should return all subtasks', inject([TodoDataService], (service: TodoDataService) => {
+        let parent = new Todo({title: 'Parent', complete: false});
+        service.addTodo(parent);
+        let child1 = new Todo({title: 'child', complete: false, parent: 1});
+        let child2 = new Todo({title: 'child', complete: false, parent: 1});
+        service.addTodo(child1);
+        service.addTodo(child2);
+        expect(service.getSubTasks(1)).toEqual(([child1, child2]));
+      }));
+  });
+
 });

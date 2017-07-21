@@ -31,6 +31,12 @@ export class TodoDataService {
     return this;
   }
 
+  getSubTasks(id: number): Todo[] {
+    this.todos = this.todos
+      .filter(todo => todo.parent === id);
+    return this.todos;
+  }
+
   // simulate Put /todos/:id
   updateTodoById(id: number, values: Object = {}): Todo {
     let todo = this.getTodoById(id);
